@@ -1,4 +1,5 @@
 from room import Room
+from player import Player
 
 # Declare all the rooms
 
@@ -48,4 +49,49 @@ room['treasure'].s_to = room['narrow']
 # If the user enters a cardinal direction, attempt to move to the room there.
 # Print an error message if the movement isn't allowed.
 #
-# If the user enters "q", quit the game.ffsdggdg
+# If the user enters "q", quit the game.
+
+newP = Player('Addi', room["outside"])
+
+print(newP.current_room.name)
+print(newP.current_room.description)
+
+direction = input('Please enter a direction: n, e, s, or w: ')
+
+while direction != 'q':
+    possible = ['n', 'e', 's', 'w']
+
+    if direction not in possible:
+        print("This direction is not allowed!")
+
+    if direction == 'n':
+        try:
+            newP.current_room = newP.current_room.n_to
+        except:
+            print('There is nothing in this direction.')
+    
+    if direction == 'e':
+        try:
+            newP.current_room = newP.current_room.e_to
+        except:
+            print('There is nothing in this direction.')
+    
+    if direction == 'w':
+        try:
+            newP.current_room = newP.current_room.w_to
+        except:
+            print('There is nothing in this direction.')
+
+    if direction == 's':
+        try:
+            newP.current_room = newP.current_room.s_to
+        except:
+            print('There is nothing in this direction.')
+
+    print(f'Current Room: {newP.current_room.name}')
+    print(f'Description: {newP.current_room.description}')
+    
+    direction = input()
+
+if direction == 'q':
+    print("Thanks for playing!")
